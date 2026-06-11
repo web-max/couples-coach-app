@@ -15,6 +15,6 @@ OpenRouter streaming, transit-only). Meter, vault, importer, build jobs: not yet
 
 - Dev: copy `.env.example` to `.env`, fill it, then `npm run dev -w backend`.
 - Tests: `npm test -w backend` (upstream is mocked; no network or keys needed).
-- Deploy: Railway service rooted at the repo (`backend/railway.toml`), env vars
+- Deploy: Railway service rooted at the repo (root `railway.toml`), env vars
   from `.env.example`. The model is the `MODEL_ID` config string — swappable
   without an app update.
