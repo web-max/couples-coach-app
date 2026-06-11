@@ -123,3 +123,19 @@ chosen); repo renamed at naming time.
 
 **Why:** App-store policy and trademark hygiene, and honesty — the AI inside isn't
 necessarily GPT. The old name advertised the thing we decoupled from.
+
+## 13. Founding infrastructure: Railway, OpenRouter, Supabase Auth, config over constants
+
+*(Settled 2026-06-11, post-bootstrap session — the first decision after the founding twelve.)*
+
+**Decision:** Backend hosts on Railway (as the predecessor does). OpenRouter is
+the first relay vendor — reachable only through our relay, with the model as a
+config string. Identity is Supabase Auth, because RLS keys off `auth.uid()`
+natively. Tunable product numbers (the session meter's free-tier counts, caps)
+live in server-side config, never as app constants — adjustable without an app
+release; an admin surface can sit on top later.
+
+**Why:** Each choice keeps an existing escape route: Railway and Supabase are
+already covered by the portability rules (§11), OpenRouter sits behind our own
+relay contract (§3), and config-over-constants is what makes "exact numbers are
+launch-tuning" (§7) operationally true.

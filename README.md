@@ -12,17 +12,19 @@ crosses to the other, and works each conflict to a mutually-agreed finish.
 
 ## Status
 
-**Pre-build.** Founding docs and layout only; no application code yet. The product
-needs a real name — the codename carries no meaning and the repo gets renamed when
-naming happens.
+**Phase 1 (foundation) built:** db schema with RLS + session RPCs (tested),
+the OpenRouter relay (JWT auth, rate limit, transit-only streaming), and a bare
+Expo chat app with device-only transcripts. Plan: `docs/superpowers/plans/`.
+Not yet: pairing, consent ritual, coach docs, meter, vault, importer. The
+product still needs a real name — the repo gets renamed when naming happens.
 
 ## Layout
 
 ```
-app/        Expo / React Native app (iOS + Android) — not yet generated
+app/        Expo / React Native app (iOS + Android)
 backend/    Relay (AI providers), session meter, E2EE vault, PairGPT importer
 db/         Postgres schema, migrations, RLS policies, shared types
-docs/       Reference docs and design ledgers
+docs/       Reference docs, design ledgers, implementation plans
 ```
 
 Two deploys (app stores + backend), one database, one repo.
