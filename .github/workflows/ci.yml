@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Don't pile up runs on the same branch — keep only the latest.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: backend · typecheck + tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck -w backend
+      - run: npm test -w backend
+
+  app:
+    name: app · typecheck + tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck -w app
+      - run: npm test -w app
+
+  db:
+    name: db · migrations + tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      # Bare Postgres server; the harness's shim supplies the Supabase objects.
+      - name: Install PostgreSQL server
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends postgresql
+      - name: Apply migrations + run behavioral tests
+        run: bash scripts/test-migrations.sh
