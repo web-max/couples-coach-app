@@ -7,8 +7,10 @@ trust rules are ported from the predecessor: read
 
 ## Layout & testing
 
-- `migrations/` — plain SQL, applied in filename order. Session *metadata* only
-  lives here; transcripts never touch the database.
+- Migrations live in `supabase/migrations/` at the repo root (standard Supabase
+  layout, `YYYYMMDDHHMMSS_name.sql`, applied in timestamp order) so Supabase's
+  GitHub integration auto-applies them on push. Session *metadata* only lives
+  there; transcripts never touch the database.
 - `tests/` — behavioral SQL tests (RLS scoping, RPC contracts); each file is
   self-isolating (`begin … rollback`) and fails via `raise exception`.
 - Run both with `npm run db:test` — applies everything to a throwaway local

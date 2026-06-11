@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Apply every migration in db/migrations/ against a throwaway local Postgres,
+# Apply every migration in supabase/migrations/ against a throwaway local Postgres,
 # in filename order, and fail loudly on the first error. Ported from the
 # predecessor repo (web-max/chatgpt-relationship-app scripts/test-migrations.sh).
 #
@@ -22,7 +22,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-MIGRATIONS_DIR="$REPO_ROOT/db/migrations"
+MIGRATIONS_DIR="$REPO_ROOT/supabase/migrations"
 
 # --- locate the Postgres server binaries ----------------------------------
 BINDIR="$(pg_config --bindir 2>/dev/null || true)"
@@ -102,7 +102,7 @@ SQL
 # --- apply every migration in filename order --------------------------------
 count=0
 if compgen -G "$MIGRATIONS_DIR/*.sql" >/dev/null 2>&1; then
-  echo "→ applying migrations from db/migrations/"
+  echo "→ applying migrations from supabase/migrations/"
   for f in "$MIGRATIONS_DIR"/*.sql; do
     if run_pg "${PSQL[@]}" -f "$f" >/dev/null 2>"$WORKDIR/err.log"; then
       echo "  ok   $(basename "$f")"

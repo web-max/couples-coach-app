@@ -139,3 +139,17 @@ release; an admin surface can sit on top later.
 already covered by the portability rules (§11), OpenRouter sits behind our own
 relay contract (§3), and config-over-constants is what makes "exact numbers are
 launch-tuning" (§7) operationally true.
+
+## 14. Migrations: standard Supabase layout, applied by GitHub integration
+
+*(Settled 2026-06-11.)*
+
+**Decision:** Migrations live in `supabase/migrations/` (standard Supabase
+layout, `YYYYMMDDHHMMSS_name.sql`) and are applied to the hosted project by
+Supabase's GitHub integration on push. The local `db:test` harness stays the
+merge gate; nothing is applied manually.
+
+**Why:** One deploy path with no hand-run steps — what lands on main is what
+runs in production, and the standard layout keeps Supabase tooling (CLI,
+branching, integration) working without adapters. Portability (§11) is
+untouched: the migrations stay plain SQL, only the folder is Supabase-shaped.
