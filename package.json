@@ -1,0 +1,12 @@
+{
+  "name": "couples-coach-app",
+  "private": true,
+  "workspaces": ["backend", "app"],
+  "engines": { "node": ">=20.0.0" },
+  "scripts": {
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "db:test": "bash scripts/test-migrations.sh"
+  }
+}
