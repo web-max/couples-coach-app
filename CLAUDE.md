@@ -5,10 +5,8 @@
 - **Source of truth — read first.** `SPEC.md` (product intent) and `KEY-DECISIONS.md` (settled decisions) are authoritative — check them **before any design / library / infra / product decision, and before asking the user one**; they usually already answer it. For a non-trivial feature/behavior change, also reconcile the wider canonical docs it *touches*. Anything auth, data-exposure, or public-surface shaped gets priority security scrutiny (`SPEC.md` security section; `docs/reference/BLUEPRINTS.md` for the predecessor's hardened patterns) — trivial edits exempt. If code conflicts with `SPEC.md`, surface it — don't silently follow the code.
 - **Capture decisions back.** If a decision genuinely isn't covered and you have to ask the user, then once they decide, **propose a concise principle-level edit to the right doc** — `SPEC.md` for product intent, `KEY-DECISIONS.md` for settled architecture — so the same question never needs asking again. Record the durable **principle and its *why*, at the docs' existing altitude** — never a granular or one-off technical call. **Suggest it for approval; don't apply it silently.**
 
-> Skills vendored as plain markdown (work in any container). Note: the vendored
-> `doc-reconciliation` skill still carries the predecessor's doc map — until it's
-> re-pointed at this repo's docs, follow its *procedure* but route to this repo's
-> `SPEC.md` / `KEY-DECISIONS.md` / `docs/reference/*`.
+> Skills vendored as plain markdown (work in any container). The vendored
+> `doc-reconciliation` skill carries this repo's doc map.
 
 ---
 
