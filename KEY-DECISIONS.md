@@ -153,3 +153,19 @@ merge gate; nothing is applied manually.
 runs in production, and the standard layout keeps Supabase tooling (CLI,
 branching, integration) working without adapters. Portability (§11) is
 untouched: the migrations stay plain SQL, only the folder is Supabase-shaped.
+
+## 15. Expo SDK tracks the store Expo Go, not the newest SDK
+
+*(Settled 2026-06-11.)*
+
+**Decision:** While we run inside Expo Go (pre-dev-build), the app's Expo SDK
+must match whatever SDK the *published App Store / Play Store* Expo Go currently
+supports — not the newest released SDK. When Expo ships a new SDK, we hold until
+the store Expo Go supports it before upgrading. We only run ahead of the store
+once we move onto EAS dev builds / TestFlight, where the runtime is ours to ship.
+
+**Why:** Store Expo Go lags new SDK releases by months (App Store review), and
+onboarding (§8 stack, the phone-first install) depends on both partners running
+the stock store Expo Go — a project pinned to a too-new SDK is simply refused
+("requires a newer version of Expo Go"). Tracking the store keeps the app
+installable by anyone, today, without sideloading.
